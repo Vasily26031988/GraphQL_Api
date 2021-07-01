@@ -17,7 +17,8 @@ namespace GraphQLFactory.WebHost.GraphQL
 
 	    public CustomerByIdDataLoader(
 		    IRepository<Customer> customerRepository, 
-		    IBatchScheduler batchScheduler) : base(batchScheduler)
+		    IBatchScheduler batchScheduler) 
+		    : base(batchScheduler)
 	    {
 		    _customerRepository = customerRepository;
 	    }
