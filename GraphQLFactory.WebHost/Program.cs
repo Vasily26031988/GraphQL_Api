@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Otus.Teaching.PromoCodeFactory.WebHost;
+using PromoCodeFactory.WebHost;
 
 namespace GraphQLFactory.WebHost
 {

@@ -23,7 +23,7 @@ namespace GraphQLFactory.WebHost.Mappers
 			customer.LastName = model.LastName;
 			customer.Email = model.Email;
 
-			customer.Preferences = preferences.Select(x => new CustomerPreference()
+			customer.Preferences = preferences?.Select(x => new CustomerPreference()
 			{
 				CustomerId = customer.Id,
 				Preference = x,

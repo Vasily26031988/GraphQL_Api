@@ -18,7 +18,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
-namespace Otus.Teaching.PromoCodeFactory.WebHost
+namespace PromoCodeFactory.WebHost
 {
     public class Startup
     {
@@ -36,6 +36,11 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost
             services.AddControllers().AddMvcOptions(x =>
                 x.SuppressAsyncSuffixInActionNames = false);
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+
+            services.AddGraphQLServer()
+	            .AddQueryType<DbLoggerCategory.Query>();
+	            //.AddMutationType<Mutation>();
+
             services.AddScoped<INotificationGateway, NotificationGateway>();
             services.AddScoped<IDbInitializer, EfDbInitializer>();
             services.AddDbContext<DataContext>(x =>
@@ -65,19 +70,20 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost
                 app.UseHsts();
             }
 
-            app.UseOpenApi();
-            app.UseSwaggerUi3(x =>
-            {
-                x.DocExpansion = "list";
-            });
+			app.UseOpenApi();
+			app.UseSwaggerUi3(x =>
+			{
+				x.DocExpansion = "list";
+			});
 
-            app.UseHttpsRedirection();
+			app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapGraphQL();
             });
 
             dbInitializer.InitializeDb();
