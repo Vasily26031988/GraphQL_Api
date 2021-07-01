@@ -7,9 +7,6 @@ namespace GraphQLFactory.WebHost.GraphQL
 {
 	public class Query
 	{
-		public IQueryable<Customer> GetCustomers([Service] DataContext context)
-		{
-			return context.Customers;
-		}
+		public IQueryable<Customer> GetCustomers([Service] DataContext context) => context.Customers;
 	}
 }

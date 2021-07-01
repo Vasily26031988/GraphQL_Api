@@ -37,6 +37,9 @@ namespace GraphQLFactory.DataAccess.Repositories
 
 		public async Task<IEnumerable<T>> GetRangeByIdsAsync(List<Guid> ids)
 		{
+			if (ids is null)
+				throw new ArgumentException(nameof(ids));
+			
 			var entities = await _dataContext.Set<T>().Where(x => ids.Contains(x.Id)).ToListAsync();
 			return entities;
 		}

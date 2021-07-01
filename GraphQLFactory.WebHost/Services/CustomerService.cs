@@ -82,6 +82,5 @@ namespace GraphQLFactory.WebHost.Services
 			await _customerRepository.DeleteAsync(customer);
 			return true;
 		}
-
 	}
 }

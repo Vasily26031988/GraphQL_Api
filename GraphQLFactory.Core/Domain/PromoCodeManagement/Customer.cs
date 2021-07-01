@@ -16,6 +16,6 @@ namespace GraphQLFactory.Core.Domain.PromoCodeManagement
 
 		public string Email { get; set; }
 
-		public virtual ICollection<CustomerPreference> Preferences { get; set; }
+		public virtual ICollection<CustomerPreference> Preferences { get; set; } = new List<CustomerPreference>();
 	}
 }
