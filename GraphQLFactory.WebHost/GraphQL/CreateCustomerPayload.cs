@@ -14,7 +14,8 @@ namespace GraphQLFactory.WebHost.GraphQL
 		    Customer = customer;
 	    }
 
-	    protected CreateCustomerPayload(UserError error) : base(new [] {error})
+	    protected CreateCustomerPayload(UserError error) 
+		    : base(new [] {error})
 	    {
 	    }
 

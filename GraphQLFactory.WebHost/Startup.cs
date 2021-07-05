@@ -9,6 +9,7 @@ using GraphQLFactory.DataAccess;
 using GraphQLFactory.DataAccess.Data;
 using GraphQLFactory.DataAccess.Repositories;
 using GraphQLFactory.Integration;
+using GraphQLFactory.WebHost.GraphQL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,12 +36,13 @@ namespace PromoCodeFactory.WebHost
         {
             services.AddControllers().AddMvcOptions(x =>
                 x.SuppressAsyncSuffixInActionNames = false);
-            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+           
 
             services.AddGraphQLServer()
-	            .AddQueryType<DbLoggerCategory.Query>();
-	            //.AddMutationType<Mutation>();
-
+	            .AddQueryType<Query>()
+	            .AddMutationType<Mutation>();
+                
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<INotificationGateway, NotificationGateway>();
             services.AddScoped<IDbInitializer, EfDbInitializer>();
             services.AddDbContext<DataContext>(x =>
@@ -82,7 +84,7 @@ namespace PromoCodeFactory.WebHost
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                // endpoints.MapControllers();
                 endpoints.MapGraphQL();
             });
 

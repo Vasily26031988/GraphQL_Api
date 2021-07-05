@@ -8,6 +8,6 @@ namespace GraphQLFactory.WebHost.GraphQL
 {
     public record DeleteCustomerInput
     {
-	    public Guid Id;
+	    public Guid Id { get; set; }
     }
 }
